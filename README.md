@@ -1,5 +1,7 @@
 # Today-I-Learn(TIL) Chanwon-Seo
 
+[![Blog](https://img.shields.io/badge/blog-Chanwon--Seo-brightgreen)](https://chanwon-seo.tistory.com//)
+
 ## Java
 
 - [Class(클래스)](<https://github.com/Chanwon-Seo/Today-I-Learn/blob/main/JAVA/Class(%ED%81%B4%EB%9E%98%EC%8A%A4).md>)
