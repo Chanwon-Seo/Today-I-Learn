@@ -65,10 +65,13 @@
   - 기존: 필드 변경 시 모든 SQL을 수정해야 한다.
   - JPA: **필드만 추가하면 된다.** SQL은 JPA가 처리하기 때문에 손댈 것이 없다.
 
-- 패러다임의 불일치 해결  
-  [JPA와 상속](#jpa와-상속)
+- 패러다임의 불일치 해결
+  - [JPA와 상속](#jpa와-상속)
+  - [JPA와 연관관계, 객체 그래프 탐색](#jpa와-연관관계,-객체-그래프-탐색)
+  - [JPA와 객체 그래프 탐색](#jpa와-상속)
+  - [JPA와 비교하기](#jpa와-비교하기)
 
-# jpa와 상속
+# JPA와 상속
 
 ## JPA와 상속 - 저장
 
@@ -98,6 +101,28 @@
   SELECT I.*, A.*
   FROM Item I
   JOIN ALBUM A ON I.ITEM_ID = A.ITEM_ID
+  ```
+
+- 성능
+- 데이터 접근 추상화와 벤더 독립성
+- 표준
+
+---
+
+## jpa와-연관관계, 객체 그래프 탐색
+
+- **연관관계 저장**
+
+  ```
+  member.setTeam(team);
+  jpa.persist(member);
+  ```
+
+- **객체 그래프 탐색**
+
+  ```
+  Member member = jpa.find(Member.class, memberId);
+  Team team = member.getTeam();
   ```
 
 - 성능
