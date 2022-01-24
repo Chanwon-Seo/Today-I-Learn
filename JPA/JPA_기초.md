@@ -53,26 +53,31 @@
 
 ## JPA를 사용하는 이유
 
-- SQL 중심적인 개발에서 객체 중심으로 개발
+1. SQL 중심적인 개발에서 객체 중심으로 개발
 
-- 생산성
-  - 저장 : `jpa.persist(member)`
-  - 조회 : `Member member = jpa.find(memberId)`
-  - 수정 : `member.setName("변경할 이름")`
-  - 삭제 : `jpa.remove(member)`
-- 유지보수
+2. 생산성
 
-  - 기존: 필드 변경 시 모든 SQL을 수정해야 한다.
-  - JPA: **필드만 추가하면 된다.** SQL은 JPA가 처리하기 때문에 손댈 것이 없다.
+- 저장 : `jpa.persist(member)`
+- 조회 : `Member member = jpa.find(memberId)`
+- 수정 : `member.setName("변경할 이름")`
+- 삭제 : `jpa.remove(member)`
 
-- 패러다임의 불일치 해결
-  - [JPA와 상속](#jpa와-상속)
-  - [JPA와 연관관계, 객체 그래프 탐색](#jpa와-연관관계,-객체-그래프-탐색)
-  - [JPA와 비교하기](#jpa와-비교하기)
+3. 유지보수
+4. 데이터 접근 추상화와 벤더 독립성
+5. 표준
 
-# JPA와 상속
+- 기존: 필드 변경 시 모든 SQL을 수정해야 한다.
+- JPA: **필드만 추가하면 된다.** SQL은 JPA가 처리하기 때문에 손댈 것이 없다.
 
-## JPA와 상속 - 저장
+7. 패러다임의 불일치 해결
+
+- [JPA와 상속](#jpa와-상속)
+- [JPA와 연관관계, 객체 그래프 탐색](#jpa와-연관관계-및-객체-그래프-탐색)
+- [JPA와 비교하기](#jpa와-비교하기)
+
+## 7.1 JPA와 상속
+
+### 7.1.1 JPA와 상속 - 저장
 
 - **개발자가 할 일**
 
@@ -81,12 +86,12 @@
   ```
 
 - **나머진 JPA가 처리**
-  ```
+  ```sql
   INSERT INTO ITEM ...
   INSERT INTO ALBUM ...
   ```
 
-### JPA와 상속 - 조회
+### 7.1.2 JPA와 상속 - 조회
 
 - **개발자가 할 일**
 
@@ -96,43 +101,115 @@
 
 - **나머진 JPA가 처리**
 
-  ```
+  ```sql
   SELECT I.*, A.*
   FROM Item I
   JOIN ALBUM A ON I.ITEM_ID = A.ITEM_ID
   ```
 
-- 성능
-- 데이터 접근 추상화와 벤더 독립성
-- 표준
-
 ---
 
-## JPA와 연관관계, 객체 그래프 탐색
+## 7.2 JPA와 연관관계 및 객체 그래프 탐색
 
-- **연관관계 저장**
+- 7.2.1 **연관관계 저장**
 
-  ```
+  ```java
   member.setTeam(team);
   jpa.persist(member);
   ```
 
-- **객체 그래프 탐색**
+- 7.2.2 **객체 그래프 탐색**
 
-  ```
+  ```java
   Member member = jpa.find(Member.class, memberId);
-  Team team = member.getTeam();
+  Team team = member.getTeam(); // 자유로운 객체 그래프 탐색
+
   ```
 
 ---
 
-## JPA와 비교하기
+## 7.3 JPA와 비교하기
+
+```java
+  String memberId = '100';
+  Member member1 = new jpa.find(Member.class, memberId);
+  Member member2 = new jpa.find(Member.class, memberId);
+  member1 == member2; // 같다.
+  //동일한 트랜잭션에서 조회한 엔티티는 같음을 보장한다.
+```
 
 ---
 
-- 성능
-- 데이터 접근 추상화와 벤더 독립성
-- 표준
+## 8. 성능
+
+- 8.1 1차 캐시와 동일성(identity) 보장
+
+  - 같은 트랜잭션 안에서는 같은 엔티티를 반환 - 약간의 조회 성능 향상
+
+    ```java
+    String memberId = "100";
+    Member m1 = jpa.find(Member.class, memberId); //SQL
+    Member m2 = jpa.find(Member.class, memberId); //캐시
+    println(m1 == m2) //true
+    //동일한 값일 경우 메모리의 첫번째(m1)를 그대로 반환해준다.
+    // SQL 1번만 실행
+    ```
+
+- 8.2 트랜잭션을 지원하는 쓰기 지연(transactional write-behind)
+
+  - INSERT
+
+    - 트랜잭션을 커밋할 때까지 INSERT SQL을 모음
+    - JDBC BATCH SQL 기능을 사용해서 한번에 SQL 전송
+
+    ```java
+    transaction.begin(); // [트랜잭션] 시작
+
+    em.persist(memberA);
+    em.persist(memberB);
+    em.persist(memberC);
+    //여기까지 INSERT SQL을 데이터베이스에 보내지 않는다.
+
+    //커밋하는 순간 데이터베이스에 INSERT SQL을 모아서 보낸다.
+    transaction.commit(); // [트랜잭션] 커밋
+    ```
+
+  - UPDATE
+
+    - UPDATE,DELETE로 인한 로우(DOW)락 시간 초소화
+    - 트랜잭션 커밋 시 UPDATE,DELETE SQL 실행하고, 바로 커밋
+
+    ```java
+    transaction.begin(); //[트랜잭션] 시작
+
+    changeMember(memberA);
+    deleteMember(memberB);
+    비즈니스_로직_수행(); //비즈니스 로직 수행 동안 DB 로주 락이 걸리지 않는다.
+
+    //커밋하는 순간 데이터베이스에 UPDATE, DELETE SQL을 보낸다.
+    transaction.commit(); // [트랜잭션] 커밋
+    ```
+
+- 8.3 지연 로딩과 즉시 로딩
+
+  - 지연 로딩 : **객체가 실제 사용될 때 로딩**
+
+    ```java
+    //지연 로딩
+    Member member = memberDAO.find(memberId); //SELECT * FROM MEMBER
+    Team team = member.getTeam();
+    String teamName = team.getName(); //SELECT * FROM TEAM
+    ```
+
+  - 즉시 로딩 : JOIN SQL로 **한번에 연관된 객체끼리** 미리 조회
+
+    ```java
+    //즉시 로딩
+    Member member = memberDAO.find(memberId);
+    //SELECT M._, T._ FROM MEMBER JOIN TEAM ...
+    Team team = member.getTeam();
+    String teamName = team.getName();
+    ```
 
 ---
 
