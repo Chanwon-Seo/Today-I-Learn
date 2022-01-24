@@ -62,17 +62,25 @@
 - 수정 : `member.setName("변경할 이름")`
 - 삭제 : `jpa.remove(member)`
 
-# <<<<<<< HEAD 3. 유지보수 4. 데이터 접근 추상화와 벤더 독립성 5. 표준
-
-- 패러다임의 불일치 해결
-
-  - [JPA와 상속](#jpa와-상속)
-  - [JPA와 연관관계, 객체 그래프 탐색](#jpa와-연관관계-및-객체-그래프-탐색)
-  - [JPA와 비교하기](#jpa와-비교하기)
-    > > > > > > > cdab5d2fe7f3faa3f5e57c51360199389086aa55
+# 3. 유지보수
 
 - 기존: 필드 변경 시 모든 SQL을 수정해야 한다.
 - JPA: **필드만 추가하면 된다.** SQL은 JPA가 처리하기 때문에 손댈 것이 없다.
+  ```java
+  public class Member {
+    private String memberId;
+    private String name;
+    private String tel;
+  }
+  //INSERT INTO MEMBER(MEMBER_ID, NAME, TEL) VALUES
+  //SELECT MEMBER_ID, NAME, TEL FROM MEMBER M
+  //UPDATE MEMBER SET ... TEL = ?
+  //JPA의 장점이다.
+  ```
+
+# 4. 데이터 접근 추상화와 벤더 독립성
+
+# 5. 표준
 
 7. 패러다임의 불일치 해결
 
