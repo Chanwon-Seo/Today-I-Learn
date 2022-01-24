@@ -13,3 +13,10 @@
 ## HTTP
 
 - [HTTP 상태코드](https://github.com/Chanwon-Seo/Today-I-Learn/blob/main/HTTP/HTTP%20%EC%83%81%ED%83%9C%EC%BD%94%EB%93%9C.md)
+
+## JPA
+
+- [JPA 기초](https://github.com/Chanwon-Seo/Today-I-Learn/blob/main/JPA/JPA_%EA%B8%B0%EC%B4%88.md)
+
+<hr/>
+공부하는 과정에서 작성한 글입니다. 잘못되거나 보충할 내용이 있다면 언제든지 알려주세요:)
