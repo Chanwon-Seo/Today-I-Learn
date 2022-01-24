@@ -57,10 +57,10 @@
 
 2. 생산성
 
-- 저장 : `jpa.persist(member)`
-- 조회 : `Member member = jpa.find(memberId)`
-- 수정 : `member.setName("변경할 이름")`
-- 삭제 : `jpa.remove(member)`
+   - 저장 : `jpa.persist(member)`
+   - 조회 : `Member member = jpa.find(memberId)`
+   - 수정 : `member.setName("변경할 이름")`
+   - 삭제 : `jpa.remove(member)`
 
 # 3. 유지보수
 
@@ -82,15 +82,15 @@
 
 # 5. 표준
 
-7. 패러다임의 불일치 해결
+# 6. 패러다임의 불일치 해결
 
 - [JPA와 상속](#jpa와-상속)
 - [JPA와 연관관계, 객체 그래프 탐색](#jpa와-연관관계-및-객체-그래프-탐색)
 - [JPA와 비교하기](#jpa와-비교하기)
 
-## 7.1 JPA와 상속
+## 6.1 JPA와 상속
 
-### 7.1.1 JPA와 상속 - 저장
+### 6.1.1 JPA와 상속 - 저장
 
 - **개발자가 할 일**
 
@@ -104,7 +104,7 @@
   INSERT INTO ALBUM ...
   ```
 
-### 7.1.2 JPA와 상속 - 조회
+### 6.1.2 JPA와 상속 - 조회
 
 - **개발자가 할 일**
 
@@ -122,24 +122,18 @@
 
 ---
 
-<<<<<<< HEAD
+## 6.2 JPA와 연관관계 및 객체 그래프 탐색
 
-## 7.2 JPA와 연관관계 및 객체 그래프 탐색
+### - JPA와 연관관계 및 객체 그래프 탐색
 
-=======
-
-## JPA와 연관관계 및 객체 그래프 탐색
-
-> > > > > > > cdab5d2fe7f3faa3f5e57c51360199389086aa55
-
-- 7.2.1 **연관관계 저장**
+- 6.2.1 **연관관계 저장**
 
   ```java
   member.setTeam(team);
   jpa.persist(member);
   ```
 
-- 7.2.2 **객체 그래프 탐색**
+- 6.2.2 **객체 그래프 탐색**
 
   ```java
   Member member = jpa.find(Member.class, memberId);
@@ -149,7 +143,7 @@
 
 ---
 
-## 7.3 JPA와 비교하기
+## 6.3 JPA와 비교하기
 
 ```java
   String memberId = '100';
@@ -161,9 +155,9 @@
 
 ---
 
-## 8. 성능
+## 7. 성능
 
-- 8.1 1차 캐시와 동일성(identity) 보장
+- 7.1 1차 캐시와 동일성(identity) 보장
 
   - 같은 트랜잭션 안에서는 같은 엔티티를 반환 - 약간의 조회 성능 향상
 
@@ -176,7 +170,7 @@
     // SQL 1번만 실행
     ```
 
-- 8.2 트랜잭션을 지원하는 쓰기 지연(transactional write-behind)
+- 7.2 트랜잭션을 지원하는 쓰기 지연(transactional write-behind)
 
   - INSERT
 
@@ -211,7 +205,7 @@
     transaction.commit(); // [트랜잭션] 커밋
     ```
 
-- 8.3 지연 로딩과 즉시 로딩
+- 7.3 지연 로딩과 즉시 로딩
 
   - 지연 로딩 : **객체가 실제 사용될 때 로딩**
 
