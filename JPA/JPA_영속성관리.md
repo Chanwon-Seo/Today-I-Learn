@@ -100,7 +100,7 @@ public class JpaMain {
 
 ---
 
-## 실습 CRUD
+## 실습
 
 ### 저장
 
