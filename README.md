@@ -17,7 +17,7 @@
 ## JPA
 
 - [JPA 기초](https://github.com/Chanwon-Seo/Today-I-Learn/blob/main/JPA/JPA_%EA%B8%B0%EC%B4%88.md)
-- [JPA 영속성관리](https://github.com/Chanwon-Seo/Today-I-Learn/blob/main/JPA/JPA_%EC%98%81%EC%86%8D%EC%84%B1%EA%B4%80%EB%A6%AC.md)
+- [JPA 영속성관리](https://github.com/Chanwon-Seo/Today-I-Learn/blob/main/JPA/%EC%98%81%EC%86%8D%EC%84%B1%EA%B4%80%EB%A6%AC.md)
 - [영속성 컨텍스트](https://github.com/Chanwon-Seo/Today-I-Learn/blob/main/JPA/%EC%98%81%EC%86%8D%EC%84%B1%20%EC%BB%A8%ED%85%8D%EC%8A%A4%ED%8A%B8.md)
 
 <hr/>
