@@ -24,5 +24,6 @@
 - [6. 다양한 연관관계 매핑](https://github.com/Chanwon-Seo/Today-I-Learn/blob/main/JPA/6.%20%EB%8B%A4%EC%96%91%ED%95%9C%20%EC%97%B0%EA%B4%80%EA%B4%80%EA%B3%84%20%EB%A7%A4%ED%95%91.md#%EC%9D%BC%EB%8C%80%EC%9D%BC-%EB%8C%80%EC%83%81-%ED%85%8C%EC%9D%B4%EB%B8%94%EC%97%90-%EC%99%B8%EB%9E%98-%ED%82%A4)
 - [7. 고급 매핑.md](https://github.com/Chanwon-Seo/Today-I-Learn/blob/main/JPA/7.%20%EA%B3%A0%EA%B8%89%20%EB%A7%A4%ED%95%91.md)
 - [8. 프록시와 연관관계 관리](https://github.com/Chanwon-Seo/Today-I-Learn/blob/main/JPA/8.%20%ED%94%84%EB%A1%9D%EC%8B%9C%EC%99%80%20%EC%97%B0%EA%B4%80%EA%B4%80%EA%B3%84%20%EA%B4%80%EB%A6%AC.md)
+- [9. 값 타입](https://github.com/Chanwon-Seo/Today-I-Learn/blob/main/JPA/9.%20%EA%B0%92%20%ED%83%80%EC%9E%85.md)
   <hr/>
   공부하는 과정에서 작성한 글입니다. 잘못되거나 보충할 내용이 있다면 언제든지 알려주세요:)
