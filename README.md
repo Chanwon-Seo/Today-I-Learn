@@ -25,5 +25,6 @@
 - [7. 고급 매핑.md](https://github.com/Chanwon-Seo/Today-I-Learn/blob/main/JPA/7.%20%EA%B3%A0%EA%B8%89%20%EB%A7%A4%ED%95%91.md)
 - [8. 프록시와 연관관계 관리](https://github.com/Chanwon-Seo/Today-I-Learn/blob/main/JPA/8.%20%ED%94%84%EB%A1%9D%EC%8B%9C%EC%99%80%20%EC%97%B0%EA%B4%80%EA%B4%80%EA%B3%84%20%EA%B4%80%EB%A6%AC.md)
 - [9. 값 타입](https://github.com/Chanwon-Seo/Today-I-Learn/blob/main/JPA/9.%20%EA%B0%92%20%ED%83%80%EC%9E%85.md)
-  <hr/>
+- [10. 객체지향 쿼리 언어1 - 기본 문법](https://github.com/Chanwon-Seo/Today-I-Learn/blob/main/JPA/10.%20%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5%20%EC%BF%BC%EB%A6%AC%20%EC%96%B8%EC%96%B41%20-%20%EA%B8%B0%EB%B3%B8%20%EB%AC%B8%EB%B2%95.md)
+    <hr/>
   공부하는 과정에서 작성한 글입니다. 잘못되거나 보충할 내용이 있다면 언제든지 알려주세요:)
