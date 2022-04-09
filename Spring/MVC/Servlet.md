@@ -258,3 +258,119 @@ public class RequestBodyJsonServlet extends HttpServlet {
 ```
 
 ## HttpServletResponse - 기본 사용법
+
+---
+
+## HTTP 응답 데이터 - 단순 텍스트, HTML
+
+### hello.servlet.basic.request
+
+```java
+@WebServlet(name = "responseHeaderServlet", urlPatterns = "/response-header")
+public class ResponseHeaderServlet extends HttpServlet {
+ @Override
+ protected void service(HttpServletRequest request, HttpServletResponse response)
+ throws ServletException, IOException {
+ //[status-line]
+ response.setStatus(HttpServletResponse.SC_OK); //200
+ //[response-headers]
+ response.setHeader("Content-Type", "text/plain;charset=utf-8");
+ response.setHeader("Cache-Control", "no-cache, no-store, mustrevalidate");
+ response.setHeader("Pragma", "no-cache");
+ response.setHeader("my-header","hello");
+ //[Header 편의 메서드]
+ content(response);
+ cookie(response);
+ redirect(response);
+ //[message body]
+ PrintWriter writer = response.getWriter();
+ writer.println("ok");
+ }
+}
+```
+
+### Content 편의 메서드
+
+```java
+private void content(HttpServletResponse response) {
+ //Content-Type: text/plain;charset=utf-8
+ //Content-Length: 2
+ //response.setHeader("Content-Type", "text/plain;charset=utf-8");
+ response.setContentType("text/plain");
+ response.setCharacterEncoding("utf-8");
+ //response.setContentLength(2); //(생략시 자동 생성)
+}
+```
+
+### 쿠키 편의 메서드
+
+```java
+private void cookie(HttpServletResponse response) {
+ //Set-Cookie: myCookie=good; Max-Age=600;
+ //response.setHeader("Set-Cookie", "myCookie=good; Max-Age=600");
+ Cookie cookie = new Cookie("myCookie", "good");
+ cookie.setMaxAge(600); //600초
+ response.addCookie(cookie);
+}
+```
+
+### redirect 편의 메서드
+
+```java
+private void redirect(HttpServletResponse response) throws IOException {
+ //Status Code 302
+ //Location: /basic/hello-form.html
+ //response.setStatus(HttpServletResponse.SC_FOUND); //302
+ //response.setHeader("Location", "/basic/hello-form.html");
+ response.sendRedirect("/basic/hello-form.html");
+}
+```
+
+## HTTP 응답 데이터 - 단순 텍스트, HTML
+
+### hello.servlet.basic.response
+
+```java
+@WebServlet(name = "responseHtmlServlet", urlPatterns = "/response-html")
+public class ResponseHtmlServlet extends HttpServlet {
+    @Override
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //Content-Type: text/html;charset=utf-8
+        response.setContentType("text/html");
+        response.setCharacterEncoding("utf-8");
+
+        PrintWriter writer = response.getWriter();
+        writer.println("<html>");
+        writer.println("<body>");
+        writer.println("  <div>안녕?</div>");
+        writer.println("</body>");
+        writer.println("</html>");
+    }
+}
+```
+
+## HTTP 응답 데이터- API JSON
+
+### hello.servlet.basic.response
+
+```java
+@WebServlet(name = "responseJsonServlet", urlPatterns = "/response-json")
+public class ResponseJsonServlet extends HttpServlet {
+    private ObjectMapper objectMapper = new ObjectMapper();
+
+    @Override
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //Context-Type: application/json
+        response.setContentType("application/json");
+        response.setCharacterEncoding("utf-8");
+
+        HelloData helloData = new HelloData();
+        helloData.setUsername("kim");
+        helloData.setAge(20);
+
+        //{"username":"kim","age":20
+        String result = objectMapper.writeValueAsString(helloData);
+        response.getWriter().write(result);
+    }
+}
+```
