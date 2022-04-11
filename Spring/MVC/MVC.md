@@ -1470,7 +1470,7 @@ public class FrontControllerServletV5 extends HttpServlet {
 
 ### hello.servlet.web.frontcontroller.v5.adapter
 
-````java
+```java
 public class ControllerV4HandlerAdapter implements MyHandlerAdapter {
     @Override
     public boolean supports(Object handler) {
@@ -1571,7 +1571,7 @@ public class FrontControllerServletV5 extends HttpServlet {
         return new MyView("/WEB-INF/views/" + viewName + ".jsp");
     }
 }
-````
+```
 
 ---
 
